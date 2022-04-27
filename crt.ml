@@ -4,7 +4,7 @@ let main () =
   if Array.length Sys.argv < 2 then
     failwith "Syntax: crt <integer>\n" ;
   let x = ref (fmpzxx_of_string Sys.argv.(1)) in
-  let bit_bound = fmpzxx_bits !x in
+  let bit_bound = 2 + fmpzxx_bits !x in
   let y = ref (fmpzxx_of_uint 0) in
   let prod = ref (fmpzxx_of_uint 1) in
   let prime = ref 0L in
