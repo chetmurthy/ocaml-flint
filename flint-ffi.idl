@@ -1,0 +1,29 @@
+(
+ (stanzas
+ (
+(CPP PROLOGUE
+   "
+#include <stdio.h>
+#include <string>
+#include <unistd.h>
+#include <ostream>
+#include <iostream>
+#include <vector>
+
+#include \"flintstubs.h\"
+#include \"cppffi.h\"
+")
+  (TYPEDEF
+  ((mltype (EXP int))
+   (cpptype (ID size_t))
+   (name size_t)))
+
+   (FOREIGN
+    ((ID std::string))
+    flintstubs_partition
+    (((PRIM UINT64) n))
+     "_res0 = flintstubs::partition(n); ")
+
+   )
+  )
+ )
