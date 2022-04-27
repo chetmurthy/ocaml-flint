@@ -1,3 +1,9 @@
 ocaml_flint.ml
 ocaml_flint.mli
 ocaml_flint_stubs.cc
+*.cm*
+*.o
+*.a
+*.byte
+*.so
+_build

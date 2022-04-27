@@ -9,6 +9,7 @@
 #include <ostream>
 #include <iostream>
 #include <vector>
+#include <cassert>
 
 #include \"flintstubs.h\"
 #include \"cppffi.h\"
@@ -18,11 +19,32 @@
    (cpptype (ID size_t))
    (name size_t)))
 
+   (TYPEDEF
+    ((mltype (GEN fmpzxx_id))
+     (cpptype (PTR (ID flint::fmpzxx)))
+     (name fmpzxx_id)))
+   (CPP2ML (ID fmpzxx_id)
+     "_mlvalue = c2ml_owned_pointer(_cvalue);")
+   (ML2CPP (ID fmpzxx_id)
+     "ml2c_owned_pointer(_mlvalue, _cvaluep);")
+
    (FOREIGN
     ((ID std::string))
-    flintstubs_partition
+    fmpzxx_to_string
+    (((ID fmpzxx_id) z))
+     "_res0 = z->to_string(); ")
+
+   (FOREIGN
+    ((ID fmpzxx_id))
+    fmpzxx_of_string
+    (((ID std::string) s))
+     "_res0 = new flint::fmpzxx(s.c_str()); ")
+
+   (FOREIGN
+    ((ID fmpzxx_id))
+    fmpzxx_number_of_partitions
     (((PRIM UINT64) n))
-     "_res0 = flintstubs::partition(n); ")
+     "_res0 = new flint::fmpzxx(flint::number_of_partitions(n)); ")
 
    )
   )

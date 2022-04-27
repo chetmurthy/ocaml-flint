@@ -14,6 +14,7 @@ using namespace std;
 std::string
 partition(unsigned long n)
 {
+  fmpzxx x ;
   std::string res = number_of_partitions(n).to_string() ;
   std::cout << "res = " << res << std::endl ;
   return res ;
