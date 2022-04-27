@@ -24,7 +24,7 @@ CMX= $(patsubst %.ml,%.cmx, $(ML))
 CMI= $(patsubst %.ml,%.cmi, $(ML))
 OBJECTS = $(CMO) $(CMX) $(CMI)
 
-all: $(RESULT).cma $(RESULT).cmxa dll$(RESULT).so flint_tests.byte
+all: $(RESULT).cma $(RESULT).cmxa dll$(RESULT).so flint_tests.byte crt.byte
 
 test: flint_tests.byte
 	mkdir -p _build
@@ -42,6 +42,9 @@ LINKFLAGS= -cclib -L. \
 
 flint_tests.byte: $(RESULT).cma flint_tests.cmo
 	ocamlfind ocamlc -custom -thread -package $(PACKS) -linkpkg -linkall -o flint_tests.byte $(RESULT).cma $(LINKFLAGS)  flint_tests.cmo
+
+crt.byte: $(RESULT).cma crt.ml
+	ocamlfind ocamlc -custom -thread -package $(PACKS) -linkpkg -linkall -o crt.byte $(RESULT).cma $(LINKFLAGS)  crt.ml
 
 $(RESULT).cma $(RESULT).cmxa dll$(RESULT).so: $(OBJECTS) $(RESULT)_stubs.o flintstubs.o
 	    ocamlmklib -verbose -o $(RESULT) $(CMO) $(CMX) $(RESULT)_stubs.o flintstubs.o $(OCAMLMKLIB_FLAGS)
@@ -68,7 +71,7 @@ flintstubs.o: flintstubs.cc
 	g++ -c -fPIC ${CXXFLAGS} -DPIC -o $@ $<
 
 clean::
-	rm -rf flint_tests.byte \
+	rm -rf *.byte \
 		META *.a *.cma *.cmi *.cmo *.cmx *.cmxa *.o *.so *.log *.cache _build \
 		$(RESULT).ml $(RESULT).mli $(RESULT).top \
 		$(RESULT)_stubs.c $(RESULT)_stubs.c.ORIG $(RESULT)_stubs.cc

@@ -42,6 +42,57 @@
 
    (FOREIGN
     ((ID fmpzxx_id))
+    fmpzxx_of_uint
+    (((PRIM UINT) n))
+     "_res0 = new flint::fmpzxx(n); ")
+
+   (FOREIGN
+    ((ID fmpzxx_id))
+    fmpzxx_of_uint64
+    (((PRIM UINT64) n))
+     "_res0 = new flint::fmpzxx(n); ")
+
+   (FOREIGN
+    ((PRIM UINT64))
+    fmpzxx_to_uint64
+    (((ID fmpzxx_id) z))
+     "_res0 = z->to<ulong>(); ")
+
+   (FOREIGN
+    ((PRIM UINT))
+    fmpzxx_bits
+    (((ID fmpzxx_id) z))
+     "_res0 = bits(*z); ")
+
+   (FOREIGN
+    ((ID fmpzxx_id))
+    fmpzxx_modulo
+    (((ID fmpzxx_id) x) ((ID fmpzxx_id) y))
+     "_res0 = new flint::fmpzxx( *x % *y ); ")
+
+   (FOREIGN
+    ((ID fmpzxx_id))
+    fmpzxx_mul_uint64
+    (((ID fmpzxx_id) x) ((PRIM UINT64) y))
+     "_res0 = new flint::fmpzxx( *x * y ); ")
+
+   (FOREIGN
+   ((ID fmpzxx_id))
+    fmpzxx_crt
+    (
+     ((ID fmpzxx_id) r1) ((ID fmpzxx_id) m1)
+     ((PRIM UINT64) r2) ((PRIM UINT64) m2)
+     ((PRIM BOOL) sign))
+     "_res0 = new flint::fmpzxx( r1->CRT(*m1, r2, m2, sign) ); ")
+
+   (FOREIGN
+    ((PRIM UINT64))
+    flint_n_nextprime
+    (((PRIM UINT64) z) ((PRIM BOOL) proved))
+     "_res0 = n_nextprime(z, proved); ")
+
+   (FOREIGN
+    ((ID fmpzxx_id))
     fmpzxx_number_of_partitions
     (((PRIM UINT64) n))
      "_res0 = new flint::fmpzxx(flint::number_of_partitions(n)); ")

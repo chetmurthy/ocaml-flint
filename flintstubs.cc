@@ -19,4 +19,5 @@ partition(unsigned long n)
   std::cout << "res = " << res << std::endl ;
   return res ;
 }
+
 } // namespace flintstubs
